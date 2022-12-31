@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <title>Signup</title>
+  </head>
+  <body>
+    <h1>Please sign up</h1>
+    <form method="POST" action="{{ url_for('signup') }}">
+      {{ form.csrf_token }}
+      {{ form.username.label }} {{ form.username() }}
+      {{ form.password.label }} {{ form.password() }}
+      {{ form.submit() }}
+    </form>
+    <h2><i>After this, You may have to login again.</i></h2>
+  </body>
+</html>
