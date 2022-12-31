@@ -1,7 +1,5 @@
-from time import sleep
-
 from flask_login import current_user
-from flask import Flask,  render_template, redirect, url_for, flash
+from flask import Flask, render_template, redirect, url_for, flash
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required
 from flask_wtf import FlaskForm
 from wtforms.fields import StringField, PasswordField, SubmitField
@@ -51,7 +49,6 @@ def logout():
     if current_user is not None:
         logout_user()
         flash("You have been logged out")
-        sleep(4)
         return redirect(url_for("login"))
     else:
         flash("Login first!")
@@ -63,46 +60,18 @@ def start():
     return """
 <html>
   <head>
-    <title>Start</title>
-    <style>
-      /* Add your CSS styles here */
-      body {
-        background-color: lightblue;
-      }
-      h1 {
-        color: blue;
-        text-align: center;
-        font-size: 32px;
-        font-family: sans-serif;
-      }
-      button {
-        background-color: green;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        padding: 12px 20px;
-        font-size: 16px;
-        margin: 10px;
-        text-align:center;
-      }
-      button:hover {
-        background-color: darkgreen;
-      }
-      a {
-        color: white;
-        text-decoration: none;
-      }
-    </style>
+    <title>Index</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
+      <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>  
   </head>
-  <body>
-    <h1>Welcome to Login System</h1>
-    <button><a href="http://127.0.0.1:5000/signup">Signup</a></button>
-    <button><a href="http://127.0.0.1:5000/login">Login</a></button>
+  <body style="text-align: center">
+  <div style="margin-top: 50px;" class="ui container">
+    <h1 class="ui center aligned header">Welcome to Login System</h1>
+    <a class="ui center aligned blue button" href="http://127.0.0.1:5000/signup">Signup</a>
+    <a class="ui center aligned blue button" href="http://127.0.0.1:5000/login">Login</a>
+  </div>
   </body>
 </html>
-
-
     """
 
 
@@ -123,40 +92,15 @@ def login():
 <html>
   <head>
     <title>Try again</title>
-    <style>
-      /* Add your CSS styles here */
-      body {
-        background-color: lightblue;
-      }
-      h1 {
-        color: red;
-        text-align: center;
-        font-size: 32px;
-        font-family: sans-serif;
-      }
-      button {
-        background-color: green;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        padding: 12px 20px;
-        font-size: 16px;
-        margin: 10px;
-      }
-      button:hover {
-        background-color: darkgreen;
-      }
-      a {
-        color: white;
-        text-decoration: none;
-      }
-    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
+      <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>  
   </head>
-  <body>
-    <h1>Maybe password or username is incorrect.Please try again...</h1>
-    <button><a href="http://127.0.0.1:5000/signup">Signup</a></button>
-    <button><a href="http://127.0.0.1:5000/login">Login</a></button>
+  <body style="text-align: center">
+  <div style="margin-top: 50px;" class="ui container">
+    <h2 class="ui red block header">Maybe password or username is incorrect.Please try again...</h2>
+    <a class="ui green button" href="http://127.0.0.1:5000/signup">Signup</a>
+    <a class="ui green button" href="http://127.0.0.1:5000/login">Login</a>
+    </div>
   </body>
 </html>
 
@@ -182,40 +126,15 @@ def signup():
 <html>
   <head>
     <title>Try again</title>
-    <style>
-      /* Add your CSS styles here */
-      body {
-        background-color: lightblue;
-      }
-      h1 {
-        color: red;
-        text-align: center;
-        font-size: 32px;
-        font-family: sans-serif;
-      }
-      button {
-        background-color: green;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        padding: 12px 20px;
-        font-size: 16px;
-        margin: 10px;
-      }
-      button:hover {
-        background-color: darkgreen;
-      }
-      a {
-        color: white;
-        text-decoration: none;
-      }
-    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
+      <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>  
   </head>
-  <body>
-    <h1>There's already an account. Try another one...</h1>
-    <button><a href="http://127.0.0.1:5000/signup">Signup</a></button>
-    <button><a href="http://127.0.0.1:5000/login">Login</a></button>
+  <body style="text-align: center">
+  <div style="margin-top: 50px;" class="ui container">
+    <h1 class="ui red block header">There's already an account. Try another one...</h1>
+    <a class="ui green button" href="http://127.0.0.1:5000/signup">Signup</a>
+    <a class="ui green button" href="http://127.0.0.1:5000/login">Login</a>
+    </div>
   </body>
 </html>
 
@@ -224,7 +143,12 @@ def signup():
         else:
             with app.app_context():
                 db.create_all()
-                db.session.add(User(username=str(form2.username.data), password=str(form2.password.data)))
+                db.session.add(
+                    User(
+                        username=str(form2.username.data),
+                        password=str(form2.password.data),
+                    )
+                )
                 db.session.commit()
             # Log in the user and redirect to the protected page
             return redirect(url_for("login"))
@@ -250,29 +174,8 @@ def main_page():
 <html>
 <head>
     <title>Main Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            text-align: center;
-        }
-
-        h1 {
-            color: #333;
-            font-size: 36px;
-            margin: 20px 0;
-        }
-
-        .btn {
-            background-color: blue;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            margin: 20px 0;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
+      <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>  
     <script>
         const confirmAction = () => {
             const response = confirm("Are you sure you want to logout?");
@@ -284,12 +187,26 @@ def main_page():
             }
         }
     </script>
+    <style>
+     button{
+     position: relative;
+     bottom: 90px;
+     left: 95px     
+          }
+     h1{
+     position:relative;
+     bottom: 16px;
+          }
+    </style>
 </head>
-<body>
-    <h1>You are logged in!</h1>
-    <button class="btn" style="float:right" onclick="confirmAction()">
+<body style="text-align: center">
+  <div style="margin-top: 50px;" class="ui container">
+    <h1 class="ui center aligned block header">
+    You are logged in!</h1>
+    <button class="negative ui right floated button" onclick="confirmAction()">
         Logout?
     </button>
+    </div>
 </body>
 </html>
 
