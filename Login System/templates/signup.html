@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Signup</title>
+    <title>Login</title>
     <style>
       /* Add your CSS styles here */
       body {
@@ -43,20 +43,15 @@
       input[type="submit"]:hover {
         background-color: darkgreen;
       }
-      h2 i {
-        font-style: italic;
-        color: gray;
-      }
     </style>
   </head>
   <body>
-    <h1>Please sign up</h1>
-    <form method="POST" action="{{ url_for('signup') }}">
+    <h1>Please log in</h1>
+    <form method="POST" action="{{ url_for('login') }}">
       {{ form.csrf_token }}
       {{ form.username.label }} {{ form.username() }}
       {{ form.password.label }} {{ form.password() }}
       {{ form.submit() }}
     </form>
-    <h2><i>After this, You may have to login again.</i></h2>
   </body>
 </html>
