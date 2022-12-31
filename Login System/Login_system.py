@@ -62,16 +62,46 @@ def logout():
 def start():
     return """
 <html>
-<h1>Welcome to Login System</h1>
-    <head>
-        <title>Start</title>
-<button>
-<a href="http://127.0.0.1:5000/signup" >Signup</a>
-</button>
-<button><a href="http://127.0.0.1:5000/login" >Login</a>
-</button>
-    </body>
+  <head>
+    <title>Start</title>
+    <style>
+      /* Add your CSS styles here */
+      body {
+        background-color: lightblue;
+      }
+      h1 {
+        color: blue;
+        text-align: center;
+        font-size: 32px;
+        font-family: sans-serif;
+      }
+      button {
+        background-color: green;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        padding: 12px 20px;
+        font-size: 16px;
+        margin: 10px;
+        text-align:center;
+      }
+      button:hover {
+        background-color: darkgreen;
+      }
+      a {
+        color: white;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Welcome to Login System</h1>
+    <button><a href="http://127.0.0.1:5000/signup">Signup</a></button>
+    <button><a href="http://127.0.0.1:5000/login">Login</a></button>
+  </body>
 </html>
+
 
     """
 
@@ -91,16 +121,45 @@ def login():
         else:
             return """
 <html>
-<h1>Maybe password or username is incorrect.Please try again...</h1>
-    <head>
-        <title>Try again</title>
-<button>
-<a href="http://127.0.0.1:5000/signup" >Signup</a>
-</button>
-<button><a href="http://127.0.0.1:5000/login" >Login</a>
-</button>
-    </body>
+  <head>
+    <title>Try again</title>
+    <style>
+      /* Add your CSS styles here */
+      body {
+        background-color: lightblue;
+      }
+      h1 {
+        color: red;
+        text-align: center;
+        font-size: 32px;
+        font-family: sans-serif;
+      }
+      button {
+        background-color: green;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        padding: 12px 20px;
+        font-size: 16px;
+        margin: 10px;
+      }
+      button:hover {
+        background-color: darkgreen;
+      }
+      a {
+        color: white;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Maybe password or username is incorrect.Please try again...</h1>
+    <button><a href="http://127.0.0.1:5000/signup">Signup</a></button>
+    <button><a href="http://127.0.0.1:5000/login">Login</a></button>
+  </body>
 </html>
+
 
     """
     return render_template("login.html", form=form)
@@ -121,16 +180,45 @@ def signup():
         elif user is not None and user.password != form2.password.data:
             return """
 <html>
-<h1>There's already an account.Please try again...</h1>
-    <head>
-        <title>Try again</title>
-<button>
-<a href="http://127.0.0.1:5000/signup" >Signup</a>
-</button>
-<button><a href="http://127.0.0.1:5000/login" >Login</a>
-</button>
-    </body>
+  <head>
+    <title>Try again</title>
+    <style>
+      /* Add your CSS styles here */
+      body {
+        background-color: lightblue;
+      }
+      h1 {
+        color: red;
+        text-align: center;
+        font-size: 32px;
+        font-family: sans-serif;
+      }
+      button {
+        background-color: green;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        padding: 12px 20px;
+        font-size: 16px;
+        margin: 10px;
+      }
+      button:hover {
+        background-color: darkgreen;
+      }
+      a {
+        color: white;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>There's already an account. Try another one...</h1>
+    <button><a href="http://127.0.0.1:5000/signup">Signup</a></button>
+    <button><a href="http://127.0.0.1:5000/login">Login</a></button>
+  </body>
 </html>
+
 
     """
         else:
@@ -160,27 +248,51 @@ def main_page():
         redirect(url_for("login"))
     return """
 <html>
-<h1>You are logged in!</h1>
-    <head>
-        <title>Main Page</title>
-        <script>
-            const confirmAction = () => {
-                const response = confirm("Are you sure you want to logout?");
+<head>
+    <title>Main Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+        }
 
-                if (response) {
-                    window.location.replace("http://127.0.0.1:5000/logout");
-                } else {
-                    alert("OK");
-                }
+        h1 {
+            color: #333;
+            font-size: 36px;
+            margin: 20px 0;
+        }
+
+        .btn {
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 20px 0;
+        }
+    </style>
+    <script>
+        const confirmAction = () => {
+            const response = confirm("Are you sure you want to logout?");
+
+            if (response) {
+                window.location.replace("http://127.0.0.1:5000/logout");
+            } else {
+                alert("OK");
             }
-        </script>
-    </head>
-    <body>
-        <button class="btn" style="float:right" onclick="confirmAction()">
-            Logout?
-        </button>
-    </body>
+        }
+    </script>
+</head>
+<body>
+    <h1>You are logged in!</h1>
+    <button class="btn" style="float:right" onclick="confirmAction()">
+        Logout?
+    </button>
+</body>
 </html>
+
 
     """
 
